@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    def config = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion config["compile_sdk"]
+    defaultConfig {
+        applicationId config["application_id"]
+        minSdkVersion config["min_sdk"]
+        targetSdkVersion config["target_sdk"]
+        versionCode config["version_code"]
+        versionName config["version_name"]
+        testInstrumentationRunner config["test_runner"]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += [file("$buildDir/generated/source/kapt/main")]
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    //Application dependencies
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.appCompat_version"
+    implementation "com.android.support:cardview-v7:$rootProject.ext.appCompat_version"
+    implementation "com.android.support:recyclerview-v7:$rootProject.ext.appCompat_version"
+    implementation "com.android.support:support-v4:$rootProject.ext.appCompat_version"
+    implementation "com.android.support:design:$rootProject.ext.appCompat_version"
+    implementation "android.arch.lifecycle:extensions:$rootProject.ext.archComponents_version"
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintLayout_version"
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glide_version"
+    implementation "com.google.dagger:dagger:$rootProject.ext.dagger_version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttp_logging_interceptor_version"
+
+    //Compile time dependencies
+    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.dagger_version"
+    kapt "android.arch.lifecycle:compiler:$rootProject.ext.archComponents_version"
+    kapt "com.android.databinding:compiler:$gradle_tools"
+
+    // Unit/Integration tests dependencies
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
