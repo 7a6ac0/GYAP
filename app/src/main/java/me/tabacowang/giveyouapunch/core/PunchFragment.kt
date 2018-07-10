@@ -13,4 +13,9 @@ class PunchFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
     }
+
+    companion object {
+        fun newInstance() = PunchFragment()
+        private const val TAG = "PunchFragment"
+    }
 }
