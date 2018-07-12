@@ -16,18 +16,21 @@
 
 package me.tabacowang.giveyouapunch.di
 
+import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
+import dagger.multibindings.IntoMap
+import me.tabacowang.giveyouapunch.ui.punch.PunchViewModel
 import me.tabacowang.giveyouapunch.viewmodel.PunchViewModelFactory
 
 @Suppress("unused")
 @Module
 abstract class ViewModelModule {
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(UserViewModel::class)
-//    abstract fun bindUserViewModel(userViewModel: UserViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(PunchViewModel::class)
+    abstract fun bindPunchViewModel(punchViewModel: PunchViewModel): ViewModel
 //
 //    @Binds
 //    @IntoMap

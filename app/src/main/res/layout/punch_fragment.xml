@@ -20,19 +20,19 @@
         android:focusableInTouchMode="true"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/punchLL"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="@{viewmodel.empty ? View.GONE : View.VISIBLE}">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/punchLL"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical"-->
+            <!--android:visibility="@{viewmodel.empty ? View.GONE : View.VISIBLE}">-->
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/punch_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/punch_list"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent" />-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/noPunch"
@@ -40,22 +40,22 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="vertical"
-            android:visibility="@{viewmodel.empty ? View.VISIBLE : View.GONE}">
+            android:visibility="@{View.VISIBLE}">
 
 
-            <ImageView
-                android:id="@+id/noPunchIcon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:src="@{viewmodel.noPunchIconRes}" />
+            <!--<ImageView-->
+                <!--android:id="@+id/noPunchIcon"-->
+                <!--android:layout_width="48dp"-->
+                <!--android:layout_height="48dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:src="@{viewmodel.noPunchIconRes}" />-->
 
             <TextView
                 android:id="@+id/noPunchMain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@{viewmodel.noPunchLabel}"
+                android:text="PunchFragment"
                 android:layout_marginBottom="@dimen/list_item_padding"/>
 
         </LinearLayout>

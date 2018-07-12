@@ -32,10 +32,13 @@ import me.tabacowang.giveyouapunch.PunchApp
  */
 object AppInjector {
     fun init(punchApp: PunchApp) {
-        DaggerAppComponent.builder().application(punchApp)
-            .build().inject(punchApp)
-        punchApp
-            .registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
+        DaggerAppComponent
+                .builder()
+                .application(punchApp)
+                .build()
+                .inject(punchApp)
+
+        punchApp.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
                 override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                     handleActivity(activity)
                 }

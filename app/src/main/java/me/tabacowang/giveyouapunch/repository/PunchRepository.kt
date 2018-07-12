@@ -1,19 +1,11 @@
 package me.tabacowang.giveyouapunch.repository
 
+import me.tabacowang.giveyouapunch.AppExecutors
 import javax.inject.Inject
+import javax.inject.Singleton
 
-interface PunchRepository {
-    fun punches()
-    fun punchDetail()
+@Singleton
+class PunchRepository
+@Inject constructor(private val appExecutors: AppExecutors) {
 
-    class Network
-    @Inject constructor() : PunchRepository {
-        override fun punches() {
-
-        }
-
-        override fun punchDetail() {
-
-        }
-    }
 }
