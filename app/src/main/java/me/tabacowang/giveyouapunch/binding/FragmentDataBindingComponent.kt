@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2018 Fernando Cejas Open Source Project
+/*
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.tabacowang.giveyouapunch.di.viewmodel
 
-import android.arch.lifecycle.ViewModel
-import dagger.MapKey
-import kotlin.reflect.KClass
+package me.tabacowang.giveyouapunch.binding
 
-@MapKey
-@Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)
-internal annotation class ViewModelKey(val value: KClass<out ViewModel>)
+import android.databinding.DataBindingComponent
+import android.support.v4.app.Fragment
+
+/**
+ * A Data Binding Component implementation for fragments.
+ */
+class FragmentDataBindingComponent(fragment: Fragment) : DataBindingComponent {
+    private val adapter = FragmentBindingAdapters(fragment)
+
+    override fun getFragmentBindingAdapters() = adapter
+}

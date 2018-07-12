@@ -8,7 +8,7 @@
 
         <variable
             name="viewmodel"
-            type="me.tabacowang.giveyouapunch.core.PunchViewModel" />
+            type="me.tabacowang.giveyouapunch.ui.punch.PunchViewModel" />
     </data>
 
     <RelativeLayout

@@ -13,17 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.tabacowang.giveyouapunch.util
 
-import java.util.concurrent.Executor
-import java.util.concurrent.Executors
+package me.tabacowang.giveyouapunch.di
 
-/**
- * Executor that runs a task on a new background thread.
- */
-class DiskIOThreadExecutor : Executor {
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
+import me.tabacowang.giveyouapunch.ui.punch.PunchFragment
 
-    private val diskIO = Executors.newSingleThreadExecutor()
-
-    override fun execute(command: Runnable) { diskIO.execute(command) }
+@Suppress("unused")
+@Module
+abstract class FragmentBuildersModule {
+    @ContributesAndroidInjector
+    abstract fun contributePunchFragment(): PunchFragment
+//
+//    @ContributesAndroidInjector
+//    abstract fun contributeUserFragment(): UserFragment
+//
+//    @ContributesAndroidInjector
+//    abstract fun contributeSearchFragment(): SearchFragment
 }

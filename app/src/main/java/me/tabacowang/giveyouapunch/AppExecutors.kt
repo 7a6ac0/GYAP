@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.tabacowang.giveyouapunch.util
+package me.tabacowang.giveyouapunch
 
 import android.os.Handler
 import android.os.Looper
@@ -22,7 +22,8 @@ import android.os.Looper
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
-const val THREAD_COUNT = 3
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Global executor pools for the whole application.
@@ -30,15 +31,34 @@ const val THREAD_COUNT = 3
  * Grouping tasks like this avoids the effects of task starvation (e.g. disk reads don't wait behind
  * webservice requests).
  */
-open class AppExecutors constructor(
-        val diskIO: Executor = DiskIOThreadExecutor(),
-        val networkIO: Executor = Executors.newFixedThreadPool(THREAD_COUNT),
-        val mainThread: Executor = MainThreadExecutor()
+@Singleton
+open class AppExecutors(
+    private val diskIO: Executor,
+    private val networkIO: Executor,
+    private val mainThread: Executor
 ) {
+
+    @Inject
+    constructor() : this(
+        Executors.newSingleThreadExecutor(),
+        Executors.newFixedThreadPool(3),
+        MainThreadExecutor()
+    )
+
+    fun diskIO(): Executor {
+        return diskIO
+    }
+
+    fun networkIO(): Executor {
+        return networkIO
+    }
+
+    fun mainThread(): Executor {
+        return mainThread
+    }
 
     private class MainThreadExecutor : Executor {
         private val mainThreadHandler = Handler(Looper.getMainLooper())
-
         override fun execute(command: Runnable) {
             mainThreadHandler.post(command)
         }

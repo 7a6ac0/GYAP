@@ -2,18 +2,18 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
-    def config = rootProject.extensions.getByName("ext")
-
-    compileSdkVersion config["compile_sdk"]
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
     defaultConfig {
-        applicationId config["application_id"]
-        minSdkVersion config["min_sdk"]
-        targetSdkVersion config["target_sdk"]
-        versionCode config["version_code"]
-        versionName config["version_name"]
-        testInstrumentationRunner config["test_runner"]
+        applicationId "me.tabacowang.giveyouapunch"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -23,11 +23,20 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += 'src/main/java'
         main.java.srcDirs += [file("$buildDir/generated/source/kapt/main")]
-        test.java.srcDirs += 'src/test/kotlin'
-        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+        test.java.srcDirs += 'src/test/java'
+        androidTest.java.srcDirs += 'src/androidTest/java'
+    }
+
+    lintOptions {
+        lintConfig rootProject.file('lint.xml')
     }
 
     dataBinding {
@@ -36,25 +45,31 @@ android {
 }
 
 dependencies {
-    //Application dependencies
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.appCompat_version"
-    implementation "com.android.support:cardview-v7:$rootProject.ext.appCompat_version"
-    implementation "com.android.support:recyclerview-v7:$rootProject.ext.appCompat_version"
-    implementation "com.android.support:support-v4:$rootProject.ext.appCompat_version"
-    implementation "com.android.support:design:$rootProject.ext.appCompat_version"
-    implementation "android.arch.lifecycle:extensions:$rootProject.ext.archComponents_version"
-    implementation "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintLayout_version"
-    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glide_version"
-    implementation "com.google.dagger:dagger:$rootProject.ext.dagger_version"
-    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofit_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttp_logging_interceptor_version"
+    implementation deps.support.app_compat
+    implementation deps.support.recyclerview
+    implementation deps.support.cardview
+    implementation deps.support.design
+    implementation deps.navigation.fragment_ktx
+    implementation deps.room.runtime
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    implementation deps.lifecycle.java8
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.gson
+    implementation deps.glide.runtime
 
-    //Compile time dependencies
-    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.dagger_version"
-    kapt "android.arch.lifecycle:compiler:$rootProject.ext.archComponents_version"
-    kapt "com.android.databinding:compiler:$gradle_tools"
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android
+    implementation deps.dagger.android_support
+    implementation deps.constraint_layout
+    implementation deps.kotlin.stdlib
+
+    implementation deps.timber
+
+    kapt deps.dagger.android_support_compiler
+    kapt deps.dagger.compiler
+    kapt deps.room.compiler
+    kapt deps.lifecycle.compiler
 
     // Unit/Integration tests dependencies
     testImplementation 'junit:junit:4.12'

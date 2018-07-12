@@ -1,4 +1,4 @@
-package me.tabacowang.giveyouapunch.data
+package me.tabacowang.giveyouapunch.repository
 
 import javax.inject.Inject
 

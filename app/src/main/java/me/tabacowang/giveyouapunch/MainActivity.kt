@@ -1,45 +1,36 @@
-package me.tabacowang.giveyouapunch.core
+package me.tabacowang.giveyouapunch
 
-import android.arch.lifecycle.ViewModelProvider
-import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import me.tabacowang.giveyouapunch.R
-import me.tabacowang.giveyouapunch.util.obtainViewModel
-import me.tabacowang.giveyouapunch.util.replaceFragmentInActivity
-import me.tabacowang.giveyouapunch.util.setupActionBar
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-class PunchActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     private lateinit var drawerLayout: DrawerLayout
-    
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.punch_activity)
+        setContentView(R.layout.main_activity)
 
-        setupActionBar(R.id.toolbar) {
-            setHomeAsUpIndicator(R.drawable.ic_menu)
-            setDisplayHomeAsUpEnabled(true)
-        }
+//        setupActionBar(R.id.toolbar) {
+//            setHomeAsUpIndicator(R.drawable.ic_menu)
+//            setDisplayHomeAsUpEnabled(true)
+//        }
 
         setupNavigationDrawer()
-
-        setupViewFragment()
     }
 
-    private fun setupViewFragment() {
-        supportFragmentManager.findFragmentById(R.id.contentFrame) ?:
-        PunchFragment.newInstance().let {
-            replaceFragmentInActivity(it, R.id.contentFrame)
-        }
-    }
+    override fun supportFragmentInjector() = dispatchingAndroidInjector
 
     private fun setupNavigationDrawer() {
         drawerLayout = (findViewById<DrawerLayout>(R.id.drawer_layout)).apply {
@@ -76,9 +67,5 @@ class PunchActivity : AppCompatActivity() {
             drawerLayout.closeDrawers()
             true
         }
-    }
-
-    fun obtainViewModel(): PunchViewModel = obtainViewModel(viewModelFactory) {
-
     }
 }
