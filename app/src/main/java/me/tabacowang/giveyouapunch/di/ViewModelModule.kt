@@ -22,6 +22,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import me.tabacowang.giveyouapunch.ui.punch.PunchViewModel
+import me.tabacowang.giveyouapunch.ui.punchdetail.PunchDetailViewModel
 import me.tabacowang.giveyouapunch.viewmodel.PunchViewModelFactory
 
 @Suppress("unused")
@@ -31,11 +32,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PunchViewModel::class)
     abstract fun bindPunchViewModel(punchViewModel: PunchViewModel): ViewModel
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(SearchViewModel::class)
-//    abstract fun bindSearchViewModel(searchViewModel: SearchViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PunchDetailViewModel::class)
+    abstract fun bindPunchDetailViewModel(punchDetailViewModel: PunchDetailViewModel): ViewModel
 //
 //    @Binds
 //    @IntoMap

@@ -1,4 +1,4 @@
-package me.tabacowang.giveyouapunch.ui.punch
+package me.tabacowang.giveyouapunch.ui.punchdetail
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -6,38 +6,36 @@ import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.view.GravityCompat
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import me.tabacowang.giveyouapunch.AppExecutors
 import me.tabacowang.giveyouapunch.MainActivity
 import me.tabacowang.giveyouapunch.R
 import me.tabacowang.giveyouapunch.binding.FragmentDataBindingComponent
-import me.tabacowang.giveyouapunch.databinding.PunchFragmentBinding
+import me.tabacowang.giveyouapunch.databinding.PunchDetailFragmentBinding
 import me.tabacowang.giveyouapunch.di.Injectable
 import me.tabacowang.giveyouapunch.util.autoCleared
 import me.tabacowang.giveyouapunch.util.setupActionBar
 import javax.inject.Inject
 
-class PunchFragment : Fragment(), Injectable {
+class PunchDetailFragment : Fragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    lateinit var punchViewModel: PunchViewModel
+    lateinit var punchDetailViewModel: PunchDetailViewModel
 
     @Inject
     lateinit var appExecutors: AppExecutors
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
-    var binding by autoCleared<PunchFragmentBinding>()
+    var binding by autoCleared<PunchDetailFragmentBinding>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val databinding = DataBindingUtil.inflate<PunchFragmentBinding>(
+        val databinding = DataBindingUtil.inflate<PunchDetailFragmentBinding>(
                 inflater,
-                R.layout.punch_fragment,
+                R.layout.punch_detail_fragment,
                 container,
                 false,
                 dataBindingComponent
@@ -45,8 +43,8 @@ class PunchFragment : Fragment(), Injectable {
 
         val activity = activity as? MainActivity
         activity?.setupActionBar(R.id.toolbar){
-            setHomeAsUpIndicator(R.drawable.ic_menu)
             setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
         }
         setHasOptionsMenu(true)
 
@@ -56,34 +54,17 @@ class PunchFragment : Fragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        punchViewModel = ViewModelProviders.of(this, viewModelFactory).get(PunchViewModel::class.java)
-        binding.button.setOnClickListener {
-            navController().navigate(PunchFragmentDirections.showPunchDetail())
-        }
-    }
-
-    override fun onDestroyView() {
-        val activity = activity as? MainActivity
-        activity?.setupActionBar(R.id.toolbar) {
-            setDisplayHomeAsUpEnabled(false)
-        }
-        setHasOptionsMenu(false)
-        super.onDestroyView()
+        punchDetailViewModel = ViewModelProviders.of(this, viewModelFactory).get(PunchDetailViewModel::class.java)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val activity = activity as? MainActivity
         return when (item.itemId) {
             android.R.id.home -> {
-                activity?.drawerLayout?.openDrawer(GravityCompat.START)
+                activity?.onBackPressed()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-    /**
-     * Created to be able to override in tests
-     */
-    fun navController() = findNavController()
 }

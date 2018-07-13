@@ -16,6 +16,7 @@
   -->
 <navigation xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/punchFragment">
 
     <fragment
@@ -23,9 +24,15 @@
         android:name="me.tabacowang.giveyouapunch.ui.punch.PunchFragment"
         android:label="PunchFragment" >
         <action
-            android:id="@+id/showRepo"
-            destination="@+id/repoFragment"
-            app:destination="@id/repoFragment" />
+            android:id="@+id/showPunchDetail"
+            destination="@+id/punchDetailFragment"
+            app:destination="@id/punchDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/punchDetailFragment"
+        android:name="me.tabacowang.giveyouapunch.ui.punchdetail.PunchDetailFragment"
+        android:label="PunchDetailFragment" >
     </fragment>
     <!--<fragment-->
         <!--android:id="@+id/repoFragment"-->

@@ -19,15 +19,16 @@ package me.tabacowang.giveyouapunch.di
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import me.tabacowang.giveyouapunch.ui.punch.PunchFragment
+import me.tabacowang.giveyouapunch.ui.punchdetail.PunchDetailFragment
 
 @Suppress("unused")
 @Module
 abstract class FragmentBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributePunchFragment(): PunchFragment
-//
-//    @ContributesAndroidInjector
-//    abstract fun contributeUserFragment(): UserFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributePunchDetailFragment(): PunchDetailFragment
 //
 //    @ContributesAndroidInjector
 //    abstract fun contributeSearchFragment(): SearchFragment
