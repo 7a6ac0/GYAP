@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -66,6 +67,8 @@ dependencies {
     implementation deps.kotlin.stdlib
 
     implementation deps.timber
+    implementation deps.google.firebase_core
+    implementation deps.google.firebase_store
 
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler

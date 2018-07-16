@@ -49,6 +49,9 @@ versions.kotlin = "1.2.41"
 versions.paging = "1.0.1"
 versions.work = "1.0.0-alpha04"
 versions.navigation = "1.0.0-alpha01"
+versions.google_service = "4.0.0"
+versions.firebase = "16.0.0"
+
 def deps = [:]
 
 def support = [:]
@@ -136,7 +139,7 @@ deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_g
 ext.deps = deps
 
 def build_versions = [:]
-build_versions.min_sdk = 14
+build_versions.min_sdk = 21
 build_versions.target_sdk = 26
 build_versions.build_tools = "27.0.3"
 ext.build_versions = build_versions
@@ -157,6 +160,12 @@ navigation.fragment_ktx = "android.arch.navigation:navigation-fragment-ktx:$vers
 navigation.safe_args_plugin = "android.arch.navigation:navigation-safe-args-gradle-plugin:$versions.navigation"
 navigation.testing_ktx = "android.arch.navigation:navigation-testing-ktx:$versions.navigation"
 deps.navigation = navigation
+
+def google = [:]
+google.service = "com.google.gms:google-services:$versions.google_service"
+google.firebase_core = "com.google.firebase:firebase-core:$versions.firebase"
+google.firebase_store = "com.google.firebase:firebase-firestore:$versions.firebase"
+deps.google = google
 
 ext.deps = deps
 
