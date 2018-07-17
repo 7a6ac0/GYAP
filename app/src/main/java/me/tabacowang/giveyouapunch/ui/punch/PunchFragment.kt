@@ -7,10 +7,13 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import androidx.navigation.fragment.findNavController
 import me.tabacowang.giveyouapunch.AppExecutors
 import me.tabacowang.giveyouapunch.MainActivity
@@ -18,6 +21,7 @@ import me.tabacowang.giveyouapunch.R
 import me.tabacowang.giveyouapunch.binding.FragmentDataBindingComponent
 import me.tabacowang.giveyouapunch.databinding.PunchFragmentBinding
 import me.tabacowang.giveyouapunch.di.Injectable
+import me.tabacowang.giveyouapunch.ui.common.PunchListAdapter
 import me.tabacowang.giveyouapunch.util.autoCleared
 import me.tabacowang.giveyouapunch.util.setupActionBar
 import javax.inject.Inject
@@ -32,7 +36,10 @@ class PunchFragment : Fragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
+
     var binding by autoCleared<PunchFragmentBinding>()
+
+    var adapter by autoCleared<PunchListAdapter>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val databinding = DataBindingUtil.inflate<PunchFragmentBinding>(
@@ -57,9 +64,18 @@ class PunchFragment : Fragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         punchViewModel = ViewModelProviders.of(this, viewModelFactory).get(PunchViewModel::class.java)
-        binding.button.setOnClickListener {
-            navController().navigate(PunchFragmentDirections.showPunchDetail())
+//        binding.button.setOnClickListener {
+//            navController().navigate(PunchFragmentDirections.showPunchDetail())
+//        }
+        val punchAdapter = PunchListAdapter(
+                dataBindingComponent = dataBindingComponent,
+                appExecutors = appExecutors
+        ) {
+
         }
+
+        binding.punchList.adapter = punchAdapter
+        adapter = punchAdapter
     }
 
     override fun onDestroyView() {
@@ -80,6 +96,19 @@ class PunchFragment : Fragment(), Injectable {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun initRecycleView() {
+        binding.punchList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val lastPosition = layoutManager.findLastVisibleItemPosition()
+                if (lastPosition == adapter.itemCount - 1) {
+                }
+            }
+        })
+
+
     }
 
     /**

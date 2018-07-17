@@ -69,6 +69,7 @@ dependencies {
     implementation deps.timber
     implementation deps.google.firebase_core
     implementation deps.google.firebase_store
+    implementation deps.google.firebase_auth
 
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler

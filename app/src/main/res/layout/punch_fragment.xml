@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View" />
+        <import type="me.tabacowang.giveyouapunch.vo.Punch" />
 
-        <variable
-            name="viewmodel"
-            type="me.tabacowang.giveyouapunch.ui.punch.PunchViewModel" />
+        <import type="java.util.List" />
+
     </data>
 
     <RelativeLayout
@@ -20,27 +20,28 @@
         android:focusableInTouchMode="true"
         android:orientation="vertical">
 
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/punchLL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/punch_list"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/punch_item" />
+
+        </android.support.constraint.ConstraintLayout>
+
         <!--<LinearLayout-->
-            <!--android:id="@+id/punchLL"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/noPunch"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
             <!--android:orientation="vertical"-->
-            <!--android:visibility="@{viewmodel.empty ? View.GONE : View.VISIBLE}">-->
-
-            <!--<android.support.v7.widget.RecyclerView-->
-                <!--android:id="@+id/punch_list"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent" />-->
-
-        <!--</LinearLayout>-->
-
-        <LinearLayout
-            android:id="@+id/noPunch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical"
-            android:visibility="@{View.VISIBLE}">
+            <!--android:visibility="@{View.VISIBLE}">-->
 
 
             <!--<ImageView-->
@@ -58,12 +59,7 @@
                 <!--android:text="PunchFragment"-->
                 <!--android:layout_marginBottom="@dimen/list_item_padding"/>-->
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
     </RelativeLayout>
 
