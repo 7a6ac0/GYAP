@@ -1,5 +1,6 @@
 package me.tabacowang.giveyouapunch.ui.punch
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingComponent
@@ -67,6 +68,9 @@ class PunchFragment : Fragment(), Injectable {
 //        binding.button.setOnClickListener {
 //            navController().navigate(PunchFragmentDirections.showPunchDetail())
 //        }
+
+        initRecycleView()
+
         val punchAdapter = PunchListAdapter(
                 dataBindingComponent = dataBindingComponent,
                 appExecutors = appExecutors
@@ -98,6 +102,11 @@ class PunchFragment : Fragment(), Injectable {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        punchViewModel.fetchData()
+    }
+
     private fun initRecycleView() {
         binding.punchList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -107,7 +116,9 @@ class PunchFragment : Fragment(), Injectable {
                 }
             }
         })
-
+        punchViewModel.results.observe(this, Observer { result ->
+            adapter.submitList(result?.data)
+        })
 
     }
 

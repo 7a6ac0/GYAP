@@ -71,6 +71,8 @@ dependencies {
     implementation deps.google.firebase_store
     implementation deps.google.firebase_auth
 
+    implementation deps.paging
+
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
     kapt deps.room.compiler
