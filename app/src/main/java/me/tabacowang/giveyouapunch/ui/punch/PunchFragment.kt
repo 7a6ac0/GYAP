@@ -1,8 +1,11 @@
 package me.tabacowang.giveyouapunch.ui.punch
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.arch.paging.LivePagedListBuilder
+import android.arch.paging.PagedList
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -25,6 +28,9 @@ import me.tabacowang.giveyouapunch.di.Injectable
 import me.tabacowang.giveyouapunch.ui.common.PunchListAdapter
 import me.tabacowang.giveyouapunch.util.autoCleared
 import me.tabacowang.giveyouapunch.util.setupActionBar
+import me.tabacowang.giveyouapunch.vo.Punch
+import me.tabacowang.giveyouapunch.vo.PunchDataSource
+import me.tabacowang.giveyouapunch.vo.PunchDataSourceFactory
 import javax.inject.Inject
 
 class PunchFragment : Fragment(), Injectable {
@@ -116,8 +122,8 @@ class PunchFragment : Fragment(), Injectable {
                 }
             }
         })
-        punchViewModel.results.observe(this, Observer { result ->
-            adapter.submitList(result?.data)
+        punchViewModel.items.observe(this, Observer { result ->
+            adapter.submitList(result)
         })
 
     }

@@ -16,6 +16,7 @@
 
 package me.tabacowang.giveyouapunch.ui.common
 
+import android.arch.paging.PagedListAdapter
 import android.databinding.ViewDataBinding
 import android.support.v7.recyclerview.extensions.AsyncDifferConfig
 import android.support.v7.recyclerview.extensions.ListAdapter
@@ -32,7 +33,7 @@ import me.tabacowang.giveyouapunch.AppExecutors
 abstract class DataBoundListAdapter<T, V : ViewDataBinding>(
         appExecutors: AppExecutors,
         diffCallback: DiffUtil.ItemCallback<T>
-) : ListAdapter<T, DataBoundViewHolder<V>>(
+) : PagedListAdapter<T, DataBoundViewHolder<V>>(
     AsyncDifferConfig.Builder<T>(diffCallback)
         .setBackgroundThreadExecutor(appExecutors.diskIO())
         .build()
@@ -49,5 +50,5 @@ abstract class DataBoundListAdapter<T, V : ViewDataBinding>(
         holder.binding.executePendingBindings()
     }
 
-    protected abstract fun bind(binding: V, item: T)
+    protected abstract fun bind(binding: V, item: T?)
 }

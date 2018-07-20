@@ -43,7 +43,7 @@ class PunchListAdapter(
         return binding
     }
 
-    override fun bind(binding: PunchItemBinding, item: Punch) {
+    override fun bind(binding: PunchItemBinding, item: Punch?) {
         binding.punch = item
     }
 }
