@@ -10,13 +10,12 @@ import me.tabacowang.giveyouapunch.firestore.FirestoreResource
 import me.tabacowang.giveyouapunch.repository.PunchRepository
 import me.tabacowang.giveyouapunch.util.AbsentLiveData
 import me.tabacowang.giveyouapunch.vo.Punch
-import me.tabacowang.giveyouapunch.vo.PunchDataSource
 import me.tabacowang.giveyouapunch.vo.PunchDataSourceFactory
 import javax.inject.Inject
 
 class PunchViewModel
 @Inject constructor(
-        punchRepository: PunchRepository
+        private val punchRepository: PunchRepository
 ) : ViewModel() {
     private val isFetchData = MutableLiveData<Boolean>()
 
@@ -36,11 +35,15 @@ class PunchViewModel
                             .setInitialLoadSizeHint(20)//定义第一页加载项目的数量
                             .setPageSize(20)//定义从DataSource中每一次加载的项目数量
                             .build()
-                val pagedList = LivePagedListBuilder<Int, Punch>(PunchDataSourceFactory(result.data), pagedListConfig).build()
+                val pagedList = LivePagedListBuilder<Int, Punch>(PunchDataSourceFactory(result?.data), pagedListConfig).build()
                 pagedList
             }
 
     fun fetchData() {
-        isFetchData.value = true
+        isFetchData.value = false
+    }
+
+    fun addNewPunch() {
+        punchRepository.addPunch(Punch("title1", "content1"))
     }
 }

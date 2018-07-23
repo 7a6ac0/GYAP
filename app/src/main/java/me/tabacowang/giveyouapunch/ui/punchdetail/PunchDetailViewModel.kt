@@ -8,4 +8,5 @@ class PunchDetailViewModel
 @Inject constructor(
         punchRepository: PunchRepository
 ) : ViewModel() {
+
 }

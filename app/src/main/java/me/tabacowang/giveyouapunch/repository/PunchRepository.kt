@@ -13,13 +13,17 @@ import javax.inject.Singleton
 class PunchRepository
 @Inject constructor(
         private val appExecutors: AppExecutors,
-        private val firestore: FirebaseFirestore) {
-
+        private val firestore: FirebaseFirestore
+) {
     fun loadPunches(): LiveData<FirestoreResource<List<Punch>>>? {
 //        var response: LiveData<FirestoreResource<List<Punch>>>? = null
 //        appExecutors.networkIO().execute {
 //            response = firestore.collection("Punches").asLiveData<Punch>()
 //        }
         return firestore.collection("Punches").asLiveData<Punch>()
+    }
+
+    fun addPunch(punch: Punch) {
+        firestore.collection("Punches").asLiveData<Punch>().add(punch)
     }
 }

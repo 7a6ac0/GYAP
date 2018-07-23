@@ -1,23 +1,18 @@
 package me.tabacowang.giveyouapunch.ui.punch
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.arch.paging.LivePagedListBuilder
-import android.arch.paging.PagedList
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsListView
 import androidx.navigation.fragment.findNavController
 import me.tabacowang.giveyouapunch.AppExecutors
 import me.tabacowang.giveyouapunch.MainActivity
@@ -28,9 +23,6 @@ import me.tabacowang.giveyouapunch.di.Injectable
 import me.tabacowang.giveyouapunch.ui.common.PunchListAdapter
 import me.tabacowang.giveyouapunch.util.autoCleared
 import me.tabacowang.giveyouapunch.util.setupActionBar
-import me.tabacowang.giveyouapunch.vo.Punch
-import me.tabacowang.giveyouapunch.vo.PunchDataSource
-import me.tabacowang.giveyouapunch.vo.PunchDataSourceFactory
 import javax.inject.Inject
 
 class PunchFragment : Fragment(), Injectable {
@@ -76,6 +68,7 @@ class PunchFragment : Fragment(), Injectable {
 //        }
 
         initRecycleView()
+        initFab()
 
         val punchAdapter = PunchListAdapter(
                 dataBindingComponent = dataBindingComponent,
@@ -114,18 +107,17 @@ class PunchFragment : Fragment(), Injectable {
     }
 
     private fun initRecycleView() {
-        binding.punchList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val lastPosition = layoutManager.findLastVisibleItemPosition()
-                if (lastPosition == adapter.itemCount - 1) {
-                }
-            }
-        })
         punchViewModel.items.observe(this, Observer { result ->
             adapter.submitList(result)
         })
+    }
 
+    private fun initFab() {
+        activity?.findViewById<FloatingActionButton>(R.id.fab_add_punch)?.let {
+            it.setOnClickListener {
+                punchViewModel.addNewPunch()
+            }
+        }
     }
 
     /**
