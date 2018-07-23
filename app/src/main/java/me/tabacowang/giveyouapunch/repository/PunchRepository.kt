@@ -16,11 +16,11 @@ class PunchRepository
         private val firestore: FirebaseFirestore
 ) {
     fun loadPunches(): LiveData<FirestoreResource<List<Punch>>>? {
-//        var response: LiveData<FirestoreResource<List<Punch>>>? = null
-//        appExecutors.networkIO().execute {
-//            response = firestore.collection("Punches").asLiveData<Punch>()
-//        }
         return firestore.collection("Punches").asLiveData<Punch>()
+    }
+
+    fun loadPunch(punchId: String): LiveData<FirestoreResource<Punch>> {
+        return firestore.collection("Punches").document(punchId).asLiveData<Punch>()
     }
 
     fun addPunch(punch: Punch) {

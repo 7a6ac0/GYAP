@@ -33,6 +33,9 @@
         android:id="@+id/punchDetailFragment"
         android:name="me.tabacowang.giveyouapunch.ui.punchdetail.PunchDetailFragment"
         android:label="PunchDetailFragment" >
+        <argument
+            android:name="id"
+            app:type="string" />
     </fragment>
     <!--<fragment-->
         <!--android:id="@+id/repoFragment"-->

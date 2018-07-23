@@ -63,9 +63,6 @@ class PunchFragment : Fragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         punchViewModel = ViewModelProviders.of(this, viewModelFactory).get(PunchViewModel::class.java)
-//        binding.button.setOnClickListener {
-//            navController().navigate(PunchFragmentDirections.showPunchDetail())
-//        }
 
         initRecycleView()
         initFab()
@@ -73,8 +70,8 @@ class PunchFragment : Fragment(), Injectable {
         val punchAdapter = PunchListAdapter(
                 dataBindingComponent = dataBindingComponent,
                 appExecutors = appExecutors
-        ) {
-
+        ) { punch ->
+            navController().navigate(PunchFragmentDirections.showPunchDetail(punch.id))
         }
 
         binding.punchList.adapter = punchAdapter

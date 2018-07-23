@@ -1,5 +1,6 @@
 package me.tabacowang.giveyouapunch.ui.punchdetail
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingComponent
@@ -32,6 +33,17 @@ class PunchDetailFragment : Fragment(), Injectable {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     var binding by autoCleared<PunchDetailFragmentBinding>()
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        punchDetailViewModel = ViewModelProviders.of(this, viewModelFactory).get(PunchDetailViewModel::class.java)
+        val params = PunchDetailFragmentArgs.fromBundle(arguments)
+        punchDetailViewModel.setId(params.id)
+
+        punchDetailViewModel.punch.observe(this, Observer { resource ->
+            binding.punch = resource?.data
+        })
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val databinding = DataBindingUtil.inflate<PunchDetailFragmentBinding>(
                 inflater,
@@ -50,11 +62,6 @@ class PunchDetailFragment : Fragment(), Injectable {
 
         binding = databinding
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        punchDetailViewModel = ViewModelProviders.of(this, viewModelFactory).get(PunchDetailViewModel::class.java)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

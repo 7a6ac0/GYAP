@@ -7,59 +7,35 @@
         <import type="android.view.View" />
 
         <variable
-            name="viewmodel"
-            type="me.tabacowang.giveyouapunch.ui.punchdetail.PunchDetailViewModel" />
+            name="punch"
+            type="me.tabacowang.giveyouapunch.vo.Punch" />
     </data>
 
-    <RelativeLayout
-        android:id="@+id/punchContainer"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:visibility="@{View.VISIBLE}">
 
-        <!--<LinearLayout-->
-        <!--android:id="@+id/punchLL"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical"-->
-        <!--android:visibility="@{viewmodel.empty ? View.GONE : View.VISIBLE}">-->
-
-        <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/punch_list"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
-
-        <!--</LinearLayout>-->
-
-        <LinearLayout
-            android:id="@+id/noPunch"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/punch_detail_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical"
-            android:visibility="@{View.VISIBLE}">
+            android:text="@{punch.title}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:maxLines="1"/>
 
+        <TextView
+            android:id="@+id/punch_detail_content"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:gravity="top"
+            android:text="@{punch.content}"/>
 
-            <!--<ImageView-->
-            <!--android:id="@+id/noPunchIcon"-->
-            <!--android:layout_width="48dp"-->
-            <!--android:layout_height="48dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:src="@{viewmodel.noPunchIconRes}" />-->
-
-            <TextView
-                android:id="@+id/noPunchMain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="PunchDetailFragment"
-                android:layout_marginBottom="@dimen/list_item_padding"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </layout>

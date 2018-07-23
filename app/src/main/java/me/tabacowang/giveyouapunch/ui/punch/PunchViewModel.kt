@@ -6,6 +6,7 @@ import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
+import com.google.firebase.Timestamp
 import me.tabacowang.giveyouapunch.firestore.FirestoreResource
 import me.tabacowang.giveyouapunch.repository.PunchRepository
 import me.tabacowang.giveyouapunch.util.AbsentLiveData
@@ -40,10 +41,12 @@ class PunchViewModel
             }
 
     fun fetchData() {
-        isFetchData.value = false
+        isFetchData.value = true
     }
 
     fun addNewPunch() {
-        punchRepository.addPunch(Punch("title1", "content1"))
+        // For test.
+//        for (i in 1..200)
+            punchRepository.addPunch(Punch("title", "content", 0, Timestamp.now()))
     }
 }
