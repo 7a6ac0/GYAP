@@ -22,7 +22,7 @@ import me.tabacowang.giveyouapunch.MainActivity
 
 @Suppress("unused")
 @Module
-abstract class MainActivityModule {
+abstract class ActivityModule {
     @ContributesAndroidInjector(modules = [FragmentBuildersModule::class])
     abstract fun contributeMainActivity(): MainActivity
 }

@@ -110,9 +110,11 @@ class PunchFragment : Fragment(), Injectable {
     }
 
     private fun initFab() {
-        activity?.findViewById<FloatingActionButton>(R.id.fab_add_punch)?.let {
+        activity?.findViewById<FloatingActionButton>(R.id.punch_fab)?.let {
+            it.setImageResource(R.drawable.ic_add)
             it.setOnClickListener {
-                punchViewModel.addNewPunch()
+//                punchViewModel.addNewPunch()
+                navController().navigate(PunchFragmentDirections.addPunch(null))
             }
         }
     }

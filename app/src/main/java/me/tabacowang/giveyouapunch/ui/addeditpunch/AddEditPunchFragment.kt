@@ -1,4 +1,4 @@
-package me.tabacowang.giveyouapunch.ui.punchdetail
+package me.tabacowang.giveyouapunch.ui.addeditpunch
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
@@ -12,53 +12,50 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import me.tabacowang.giveyouapunch.AppExecutors
 import me.tabacowang.giveyouapunch.MainActivity
 import me.tabacowang.giveyouapunch.R
 import me.tabacowang.giveyouapunch.binding.FragmentDataBindingComponent
-import me.tabacowang.giveyouapunch.databinding.PunchDetailFragmentBinding
+import me.tabacowang.giveyouapunch.databinding.AddEditPunchFragmentBinding
 import me.tabacowang.giveyouapunch.di.Injectable
+import me.tabacowang.giveyouapunch.ui.punchdetail.PunchDetailFragmentDirections
 import me.tabacowang.giveyouapunch.util.autoCleared
 import me.tabacowang.giveyouapunch.util.setupActionBar
 import javax.inject.Inject
 
-class PunchDetailFragment : Fragment(), Injectable {
+class AddEditPunchFragment : Fragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    lateinit var punchDetailViewModel: PunchDetailViewModel
-
-    @Inject
-    lateinit var appExecutors: AppExecutors
+    lateinit var addEditPunchViewModel: AddEditPunchViewModel
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
-    var binding by autoCleared<PunchDetailFragmentBinding>()
+
+    var binding by autoCleared<AddEditPunchFragmentBinding>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        punchDetailViewModel = ViewModelProviders.of(this, viewModelFactory).get(PunchDetailViewModel::class.java)
-        val params = PunchDetailFragmentArgs.fromBundle(arguments)
-        punchDetailViewModel.setId(params.id)
+        addEditPunchViewModel = ViewModelProviders.of(this, viewModelFactory).get(AddEditPunchViewModel::class.java)
+        val params = AddEditPunchFragmentArgs.fromBundle(arguments)
+        addEditPunchViewModel.setId(params.id)
 
         initFab()
 
-        punchDetailViewModel.punch.observe(this, Observer { resource ->
+        addEditPunchViewModel.punch.observe(this, Observer { resource ->
             binding.punch = resource?.data
         })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val databinding = DataBindingUtil.inflate<PunchDetailFragmentBinding>(
+        val databinding = DataBindingUtil.inflate<AddEditPunchFragmentBinding>(
                 inflater,
-                R.layout.punch_detail_fragment,
+                R.layout.add_edit_punch_fragment,
                 container,
                 false,
                 dataBindingComponent
         )
 
         val activity = activity as? MainActivity
-        activity?.setupActionBar(R.id.toolbar){
+        activity?.setupActionBar(R.id.toolbar) {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
@@ -81,15 +78,11 @@ class PunchDetailFragment : Fragment(), Injectable {
 
     private fun initFab() {
         activity?.findViewById<FloatingActionButton>(R.id.punch_fab)?.let {
-            it.setImageResource(R.drawable.ic_edit)
+            it.setImageResource(R.drawable.ic_done)
             it.setOnClickListener {
-                navController().navigate(PunchDetailFragmentDirections.editPunch(binding.punch?.id))
+
             }
         }
     }
 
-    /**
-     * Created to be able to override in tests
-     */
-    fun navController() = findNavController()
 }

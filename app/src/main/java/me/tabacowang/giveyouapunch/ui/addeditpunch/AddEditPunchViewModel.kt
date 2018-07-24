@@ -1,4 +1,4 @@
-package me.tabacowang.giveyouapunch.ui.punchdetail
+package me.tabacowang.giveyouapunch.ui.addeditpunch
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -10,7 +10,7 @@ import me.tabacowang.giveyouapunch.util.AbsentLiveData
 import me.tabacowang.giveyouapunch.vo.Punch
 import javax.inject.Inject
 
-class PunchDetailViewModel
+class AddEditPunchViewModel
 @Inject constructor(
         private val punchRepository: PunchRepository
 ) : ViewModel() {
@@ -25,6 +25,10 @@ class PunchDetailViewModel
 
     fun setId(punchId: String?) {
         _punchId.value = PunchId(punchId)
+    }
+
+    fun updatePunch() {
+
     }
 
     data class PunchId(val punchId: String?) {

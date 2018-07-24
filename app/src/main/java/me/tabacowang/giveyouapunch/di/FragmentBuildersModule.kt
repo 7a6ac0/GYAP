@@ -18,6 +18,7 @@ package me.tabacowang.giveyouapunch.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import me.tabacowang.giveyouapunch.ui.addeditpunch.AddEditPunchFragment
 import me.tabacowang.giveyouapunch.ui.punch.PunchFragment
 import me.tabacowang.giveyouapunch.ui.punchdetail.PunchDetailFragment
 
@@ -29,6 +30,9 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributePunchDetailFragment(): PunchDetailFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAddEditPunchFragment(): AddEditPunchFragment
 //
 //    @ContributesAndroidInjector
 //    abstract fun contributeSearchFragment(): SearchFragment

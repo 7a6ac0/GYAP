@@ -21,6 +21,7 @@ import android.arch.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+import me.tabacowang.giveyouapunch.ui.addeditpunch.AddEditPunchViewModel
 import me.tabacowang.giveyouapunch.ui.punch.PunchViewModel
 import me.tabacowang.giveyouapunch.ui.punchdetail.PunchDetailViewModel
 import me.tabacowang.giveyouapunch.viewmodel.PunchViewModelFactory
@@ -37,11 +38,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PunchDetailViewModel::class)
     abstract fun bindPunchDetailViewModel(punchDetailViewModel: PunchDetailViewModel): ViewModel
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(RepoViewModel::class)
-//    abstract fun bindRepoViewModel(repoViewModel: RepoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddEditPunchViewModel::class)
+    abstract fun bindAddEditPunchViewModel(addEditPunchViewModel: AddEditPunchViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: PunchViewModelFactory): ViewModelProvider.Factory

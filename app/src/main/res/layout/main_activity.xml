@@ -38,7 +38,7 @@
             </FrameLayout>
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_add_punch"
+                android:id="@+id/punch_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"

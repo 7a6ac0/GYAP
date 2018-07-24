@@ -27,6 +27,10 @@
             android:id="@+id/showPunchDetail"
             destination="@+id/punchDetailFragment"
             app:destination="@id/punchDetailFragment" />
+        <action
+            android:id="@+id/addPunch"
+            destination="@+id/addEditPunchFragment"
+            app:destination="@id/addEditPunchFragment" />
     </fragment>
 
     <fragment
@@ -36,30 +40,19 @@
         <argument
             android:name="id"
             app:type="string" />
+        <action
+            android:id="@+id/editPunch"
+            destination="@+id/addEditPunchFragment"
+            app:destination="@id/addEditPunchFragment" />
     </fragment>
-    <!--<fragment-->
-        <!--android:id="@+id/repoFragment"-->
-        <!--android:name="com.android.example.github.ui.repo.RepoFragment"-->
-        <!--android:label="RepoFragment" >-->
-        <!--<argument-->
-            <!--android:name="owner"-->
-            <!--app:type="string" />-->
-        <!--<argument-->
-            <!--android:name="name"-->
-            <!--app:type="string" />-->
-        <!--<action-->
-            <!--android:id="@+id/showUser"-->
-            <!--app:destination="@id/userFragment" />-->
-    <!--</fragment>-->
-    <!--<fragment-->
-        <!--android:id="@+id/userFragment"-->
-        <!--android:name="com.android.example.github.ui.user.UserFragment"-->
-        <!--android:label="UserFragment" >-->
-        <!--<argument-->
-            <!--android:name="login"-->
-            <!--app:type="string" />-->
-        <!--<action-->
-            <!--android:id="@+id/showRepo"-->
-            <!--app:destination="@id/repoFragment" />-->
-    <!--</fragment>-->
+
+    <fragment
+        android:id="@+id/addEditPunchFragment"
+        android:name="me.tabacowang.giveyouapunch.ui.addeditpunch.AddEditPunchFragment"
+        android:label="AddEditPunchFragment" >
+        <argument
+            android:name="id"
+            app:type="string" />
+    </fragment>
+
 </navigation>
