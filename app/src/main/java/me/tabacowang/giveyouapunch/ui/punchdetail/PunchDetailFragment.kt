@@ -69,7 +69,7 @@ class PunchDetailFragment : Fragment(), Injectable {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val activity = activity as? MainActivity
+//        val activity = activity as? MainActivity
         return when (item.itemId) {
             android.R.id.home -> {
                 activity?.onBackPressed()

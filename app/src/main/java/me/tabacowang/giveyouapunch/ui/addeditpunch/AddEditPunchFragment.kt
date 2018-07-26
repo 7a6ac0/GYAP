@@ -66,7 +66,6 @@ class AddEditPunchFragment : Fragment(), Injectable {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val activity = activity as? MainActivity
         return when (item.itemId) {
             android.R.id.home -> {
                 activity?.onBackPressed()
@@ -80,7 +79,7 @@ class AddEditPunchFragment : Fragment(), Injectable {
         activity?.findViewById<FloatingActionButton>(R.id.punch_fab)?.let {
             it.setImageResource(R.drawable.ic_done)
             it.setOnClickListener {
-
+                this@AddEditPunchFragment.activity?.onBackPressed()
             }
         }
     }
