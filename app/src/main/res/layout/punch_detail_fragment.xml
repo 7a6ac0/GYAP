@@ -9,6 +9,10 @@
         <variable
             name="punch"
             type="me.tabacowang.giveyouapunch.vo.Punch" />
+
+        <variable
+            name="callback"
+            type="me.tabacowang.giveyouapunch.ui.punchdetail.ButtonClickCallBack" />
     </data>
 
     <LinearLayout
@@ -35,6 +39,13 @@
             android:layout_height="350dp"
             android:gravity="top"
             android:text="@{punch.content}"/>
+
+        <ImageButton
+            android:id="@+id/punch_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{(view) -> callback.click(punch, view)}"
+            app:srcCompat="@mipmap/ic_launcher" />
 
     </LinearLayout>
 

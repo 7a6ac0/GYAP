@@ -21,6 +21,7 @@ import me.tabacowang.giveyouapunch.databinding.PunchDetailFragmentBinding
 import me.tabacowang.giveyouapunch.di.Injectable
 import me.tabacowang.giveyouapunch.util.autoCleared
 import me.tabacowang.giveyouapunch.util.setupActionBar
+import me.tabacowang.giveyouapunch.vo.Punch
 import javax.inject.Inject
 
 class PunchDetailFragment : Fragment(), Injectable {
@@ -56,6 +57,12 @@ class PunchDetailFragment : Fragment(), Injectable {
                 false,
                 dataBindingComponent
         )
+
+        databinding.callback = object : ButtonClickCallBack {
+            override fun click(punch: Punch, v: View) {
+
+            }
+        }
 
         val activity = activity as? MainActivity
         activity?.setupActionBar(R.id.toolbar){
