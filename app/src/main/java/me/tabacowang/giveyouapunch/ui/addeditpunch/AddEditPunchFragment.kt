@@ -81,6 +81,9 @@ class AddEditPunchFragment : Fragment(), Injectable {
         activity?.findViewById<FloatingActionButton>(R.id.punch_fab)?.let {
             it.setImageResource(R.drawable.ic_done)
             it.setOnClickListener {
+                if (binding.punch?.title.isNullOrBlank() || binding.punch?.content.isNullOrBlank()) {
+                    return@setOnClickListener
+                }
                 addEditPunchViewModel.savePunch(binding.punch!!)
                 this@AddEditPunchFragment.activity?.onBackPressed()
             }
