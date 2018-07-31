@@ -26,4 +26,8 @@ class PunchRepository
     fun addPunch(punch: Punch) {
         firestore.collection("Punches").asLiveData<Punch>().add(punch)
     }
+
+    fun updatePunch(punch: Punch) {
+        firestore.collection("Punches").document(punch.id!!).asLiveData<Punch>().set(punch)
+    }
 }

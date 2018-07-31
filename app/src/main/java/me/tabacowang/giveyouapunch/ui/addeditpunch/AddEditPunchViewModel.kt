@@ -27,8 +27,13 @@ class AddEditPunchViewModel
         _punchId.value = PunchId(punchId)
     }
 
-    fun updatePunch() {
-
+    fun savePunch(punch: Punch) {
+        if (this@AddEditPunchViewModel.punch.value?.data == null) {
+            punchRepository.addPunch(punch)
+        }
+        else {
+            punchRepository.updatePunch(punch)
+        }
     }
 
     data class PunchId(val punchId: String?) {

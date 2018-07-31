@@ -43,10 +43,4 @@ class PunchViewModel
     fun fetchData() {
         isFetchData.value = true
     }
-
-    fun addNewPunch() {
-        // For test.
-//        for (i in 1..200)
-            punchRepository.addPunch(Punch("title", "content", 0, Timestamp.now()))
-    }
 }

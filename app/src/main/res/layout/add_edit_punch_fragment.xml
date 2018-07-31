@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/title_hint"
-                android:text="@{punch.title}"
+                android:text="@={punch.title}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:maxLines="1"/>
 
@@ -41,7 +41,7 @@
                 android:layout_height="350dp"
                 android:gravity="top"
                 android:hint="@string/content_hint"
-                android:text="@{punch.content}"/>
+                android:text="@={punch.content}"/>
 
         </LinearLayout>
     </ScrollView>
