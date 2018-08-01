@@ -27,6 +27,10 @@ class PunchDetailViewModel
         _punchId.value = PunchId(punchId)
     }
 
+    fun incrementPunchCount(punch: Punch) {
+        punchRepository.incrementPunchCount(punch)
+    }
+
     data class PunchId(val punchId: String?) {
         fun <T> ifExists(f: (String) -> LiveData<T>): LiveData<T> {
             return if (punchId.isNullOrBlank()) {

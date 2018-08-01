@@ -3,6 +3,7 @@ package me.tabacowang.giveyouapunch.ui.addeditpunch
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import com.google.firebase.Timestamp
 import me.tabacowang.giveyouapunch.MainActivity
 import me.tabacowang.giveyouapunch.R
@@ -81,6 +83,9 @@ class AddEditPunchFragment : Fragment(), Injectable {
         activity?.findViewById<FloatingActionButton>(R.id.punch_fab)?.let {
             it.setImageResource(R.drawable.ic_done)
             it.setOnClickListener {
+                val inputManager:InputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputManager.hideSoftInputFromWindow(it.windowToken, InputMethodManager.SHOW_FORCED)
+
                 if (binding.punch?.title.isNullOrBlank() || binding.punch?.content.isNullOrBlank()) {
                     return@setOnClickListener
                 }

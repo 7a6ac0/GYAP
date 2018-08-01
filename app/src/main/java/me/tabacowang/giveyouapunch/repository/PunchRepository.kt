@@ -30,4 +30,9 @@ class PunchRepository
     fun updatePunch(punch: Punch) {
         firestore.collection("Punches").document(punch.id!!).asLiveData<Punch>().set(punch)
     }
+
+    fun incrementPunchCount(punch: Punch) {
+        val punchTmp = punch.apply { count += 1 }
+        firestore.collection("Punches").document(punchTmp.id!!).asLiveData<Punch>().set(punchTmp)
+    }
 }

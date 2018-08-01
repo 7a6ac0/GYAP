@@ -60,7 +60,7 @@ class PunchDetailFragment : Fragment(), Injectable {
 
         databinding.callback = object : ButtonClickCallBack {
             override fun click(punch: Punch, v: View) {
-
+                punchDetailViewModel.incrementPunchCount(punch)
             }
         }
 
