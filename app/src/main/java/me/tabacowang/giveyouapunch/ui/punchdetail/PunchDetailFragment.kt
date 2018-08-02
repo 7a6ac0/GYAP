@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
@@ -20,7 +19,6 @@ import me.tabacowang.giveyouapunch.binding.FragmentDataBindingComponent
 import me.tabacowang.giveyouapunch.databinding.PunchDetailFragmentBinding
 import me.tabacowang.giveyouapunch.di.Injectable
 import me.tabacowang.giveyouapunch.util.autoCleared
-import me.tabacowang.giveyouapunch.util.setupActionBar
 import me.tabacowang.giveyouapunch.vo.Punch
 import javax.inject.Inject
 

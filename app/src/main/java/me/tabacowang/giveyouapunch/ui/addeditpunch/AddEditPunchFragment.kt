@@ -10,19 +10,17 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.Timestamp
 import me.tabacowang.giveyouapunch.MainActivity
 import me.tabacowang.giveyouapunch.R
 import me.tabacowang.giveyouapunch.binding.FragmentDataBindingComponent
 import me.tabacowang.giveyouapunch.databinding.AddEditPunchFragmentBinding
 import me.tabacowang.giveyouapunch.di.Injectable
-import me.tabacowang.giveyouapunch.ui.punchdetail.PunchDetailFragmentDirections
 import me.tabacowang.giveyouapunch.util.autoCleared
-import me.tabacowang.giveyouapunch.util.setupActionBar
 import me.tabacowang.giveyouapunch.vo.Punch
 import javax.inject.Inject
 
@@ -77,9 +75,14 @@ class AddEditPunchFragment : Fragment(), Injectable {
                     return@setOnClickListener
                 }
                 addEditPunchViewModel.savePunch(binding.punch!!)
-                this@AddEditPunchFragment.activity?.onBackPressed()
+                navController().navigateUp()
             }
         }
     }
+
+    /**
+     * Created to be able to override in tests
+     */
+    fun navController() = findNavController()
 
 }

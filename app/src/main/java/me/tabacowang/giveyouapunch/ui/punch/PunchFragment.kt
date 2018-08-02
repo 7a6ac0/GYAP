@@ -8,21 +8,17 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
-import android.support.v4.view.GravityCompat
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import me.tabacowang.giveyouapunch.AppExecutors
-import me.tabacowang.giveyouapunch.MainActivity
 import me.tabacowang.giveyouapunch.R
 import me.tabacowang.giveyouapunch.binding.FragmentDataBindingComponent
 import me.tabacowang.giveyouapunch.databinding.PunchFragmentBinding
 import me.tabacowang.giveyouapunch.di.Injectable
 import me.tabacowang.giveyouapunch.ui.common.PunchListAdapter
 import me.tabacowang.giveyouapunch.util.autoCleared
-import me.tabacowang.giveyouapunch.util.setupActionBar
 import javax.inject.Inject
 
 class PunchFragment : Fragment(), Injectable {
