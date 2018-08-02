@@ -5,8 +5,14 @@ import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import me.tabacowang.giveyouapunch.util.setupActionBar
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
@@ -20,16 +26,27 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        setupNavigationDrawer()
+        setupActionBar(R.id.toolbar) {}
+
+        drawerLayout = (findViewById<DrawerLayout>(R.id.drawer_layout)).apply {
+            setStatusBarBackground(R.color.colorPrimaryDark)
+        }
+
+        val navController = findNavController(R.id.navHostFragment)
+
+        setupNavActionBar(navController)
+
+        setupDrawerContent(findViewById(R.id.nav_view))
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 
-    private fun setupNavigationDrawer() {
-        drawerLayout = (findViewById<DrawerLayout>(R.id.drawer_layout)).apply {
-            setStatusBarBackground(R.color.colorPrimaryDark)
-        }
-        setupDrawerContent(findViewById(R.id.nav_view))
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(drawerLayout, Navigation.findNavController(this, R.id.navHostFragment))
+    }
+
+    private fun setupNavActionBar(navController: NavController) {
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
     }
 
     private fun setupDrawerContent(navigationView: NavigationView) {

@@ -46,6 +46,10 @@ class AddEditPunchFragment : Fragment(), Injectable {
 
         addEditPunchViewModel.punch.observe(this, Observer { resource ->
             binding.punch = resource?.data ?: Punch(created_at = Timestamp.now())
+            if (resource?.data == null)
+                (activity as MainActivity).supportActionBar?.title = getString(R.string.addPunch)
+            else
+                (activity as MainActivity).supportActionBar?.title = getString(R.string.editPunch)
         })
     }
 
@@ -58,25 +62,8 @@ class AddEditPunchFragment : Fragment(), Injectable {
                 dataBindingComponent
         )
 
-        val activity = activity as? MainActivity
-        activity?.setupActionBar(R.id.toolbar) {
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
-        setHasOptionsMenu(true)
-
         binding = databinding
         return binding.root
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                activity?.onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     private fun initFab() {

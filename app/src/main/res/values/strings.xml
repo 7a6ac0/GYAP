@@ -6,4 +6,6 @@
     <string name="navigation_view_header_title">GYAP</string>
     <string name="title_hint">Title</string>
     <string name="content_hint">Enter your content here.</string>
+    <string name="addPunch">Add Punch</string>
+    <string name="editPunch">Edit Punch</string>
 </resources>

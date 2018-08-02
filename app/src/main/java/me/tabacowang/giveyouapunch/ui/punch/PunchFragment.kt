@@ -49,13 +49,6 @@ class PunchFragment : Fragment(), Injectable {
                 dataBindingComponent
         )
 
-        val activity = activity as? MainActivity
-        activity?.setupActionBar(R.id.toolbar){
-            setHomeAsUpIndicator(R.drawable.ic_menu)
-            setDisplayHomeAsUpEnabled(true)
-        }
-        setHasOptionsMenu(true)
-
         binding = databinding
         return binding.root
     }
@@ -76,26 +69,6 @@ class PunchFragment : Fragment(), Injectable {
 
         binding.punchList.adapter = punchAdapter
         adapter = punchAdapter
-    }
-
-    override fun onDestroyView() {
-        val activity = activity as? MainActivity
-        activity?.setupActionBar(R.id.toolbar) {
-            setDisplayHomeAsUpEnabled(false)
-        }
-        setHasOptionsMenu(false)
-        super.onDestroyView()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val activity = activity as? MainActivity
-        return when (item.itemId) {
-            android.R.id.home -> {
-                activity?.drawerLayout?.openDrawer(GravityCompat.START)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onResume() {

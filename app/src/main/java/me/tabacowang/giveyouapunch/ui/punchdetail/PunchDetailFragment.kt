@@ -46,6 +46,7 @@ class PunchDetailFragment : Fragment(), Injectable {
 
         punchDetailViewModel.punch.observe(this, Observer { resource ->
             binding.punch = resource?.data
+            (activity as MainActivity).supportActionBar?.title = binding.punch?.title
         })
     }
 
@@ -64,27 +65,11 @@ class PunchDetailFragment : Fragment(), Injectable {
             }
         }
 
-        val activity = activity as? MainActivity
-        activity?.setupActionBar(R.id.toolbar){
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
-        setHasOptionsMenu(true)
-
         binding = databinding
         return binding.root
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        val activity = activity as? MainActivity
-        return when (item.itemId) {
-            android.R.id.home -> {
-                activity?.onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
+
 
     private fun initFab() {
         activity?.findViewById<FloatingActionButton>(R.id.punch_fab)?.let {

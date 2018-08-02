@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/punchFragment"
         android:name="me.tabacowang.giveyouapunch.ui.punch.PunchFragment"
-        android:label="PunchFragment" >
+        android:label="GYAP" >
         <action
             android:id="@+id/showPunchDetail"
             destination="@+id/punchDetailFragment"
@@ -35,8 +35,7 @@
 
     <fragment
         android:id="@+id/punchDetailFragment"
-        android:name="me.tabacowang.giveyouapunch.ui.punchdetail.PunchDetailFragment"
-        android:label="PunchDetailFragment" >
+        android:name="me.tabacowang.giveyouapunch.ui.punchdetail.PunchDetailFragment" >
         <argument
             android:name="id"
             app:type="string" />
@@ -48,8 +47,7 @@
 
     <fragment
         android:id="@+id/addEditPunchFragment"
-        android:name="me.tabacowang.giveyouapunch.ui.addeditpunch.AddEditPunchFragment"
-        android:label="AddEditPunchFragment" >
+        android:name="me.tabacowang.giveyouapunch.ui.addeditpunch.AddEditPunchFragment">
         <argument
             android:name="id"
             app:type="string" />
